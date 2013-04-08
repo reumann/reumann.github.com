@@ -1,0 +1,12 @@
+---
+layout: default
+---
+
+<div id="post">
+  	<div class="title">{{ page.title }} - {{ page.date | date:"%m.%d.%Y" }}</div>
+  	<div class="post-content">
+		{{ content }}
+  	</div>
+	<div class="prefix_3 grid_1 suffix_2"><a href="{{ page.previous.url }}">&lt;&lt;&lt;</a></div>
+	<div class="grid_1"><a href="{{ page.next.url }}">&gt;&gt;&gt;</a></div>
+</div>

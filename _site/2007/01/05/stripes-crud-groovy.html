@@ -1,0 +1,429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html>
+    <head>
+         <meta name="author" content="Rick Reumann"/>
+<meta name="keywords" content="maven, maven2, JPA, JBoss5, JBoss4, Testng, stripes, grails, extjs, jquery,
+ejb, ejb 2.1, ejb3, EJB, EJB3, jboss, stateless, stateful, local, remote, tutorial, tutorials, struts tutorials, webwork tutorials, webwork, web work, struts action, Ajax, Wicket, CRUD,
+web services, struts, apache, jsf, ibatis, spring, 
+lessons, tutorials, JSP, J2EE, JSTL, C#, .NET, Action, Forward, Token, Validate,
+Messages, Errors, Dyna, Validation, DynaForm, ActionForm, Dispatch, DispatchAction, Redirect, Tags"/> 
+<meta name="description" content="Information Technology"/>
+         	
+        <title>Stripes CRUD</title>  
+	<link rel="stylesheet" href="/css/learntechnology.css" type="text/css" media="screen" /> 
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-36634377-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+    </head>	
+    <body>
+     
+	<table width="100%">
+	    <tr>
+			<td style="text-align:left;vertical-align:top;" width="*">
+				<div  id="header" style="cursor: pointer;" onclick="location.href='http://www.learntechnology.net/';">
+					<div id="logo">
+						<h1>learntechnology.net</h1>
+						<h2>simplifying information technology</h2>
+					</div>
+				</div>
+			</td> 
+	    </tr>	
+	</table>
+    
+	<table width="100%">
+		<tr> 
+			<td class="col1"> 
+			<div id="navcontainer">
+        <div id="linkscontainer" style="padding-top:15px;"> 
+                <a href="http://www.learntechnology.net">MAIN</a>
+                <br/>
+                <br/>
+                <b>ZK</b>
+                <br/>
+                <a href="/2012/11/12/page_large_results.html">Page and Sort Large Results</a>
+                <br/>
+                <br/>
+                <b>Stripes</b>
+                <br/>
+                <a href="/2007/09/27/Stripes_CRUD.html">Stripes CRUD</a>
+                <br/>
+                <a href="/2007/01/05/stripes-crud-groovy.html">Stripes CRUD Groovy</a>
+                <br/>
+                <br/>
+                <b>Grails</b>
+                <br/>
+                <a href="/2012/07/28/grails_part1.html">Grails CRUD</a>
+                <br/>
+                <br/>
+                <b>Struts 2</b>
+                <br/>
+                <a href="/2007/11/26/struts2_crud.html">Struts2 CRUD</a>
+                <br/>
+                <a href="/2007/12/09/struts2_hibernate.html">Struts2 Hibernate</a>
+                <br/>
+                <a href="${appcontext}/content/struts2/struts2_hibernate_pico.jsp">Struts2 PicoContainer w/ Hibernate</a>
+                <br/>
+                <br/>
+                <b>EJB 3</b>
+                <br/>
+                <a href="${appcontext}/content/ejb/maven-ejb3.jsp">Maven-EJB3-JPA (JBoss5)</a>
+                <br/>
+                <a href="${appcontext}/content/ejb/ejb3_local.jsp">EJB3 - JBoss/Stateless</a>
+                <br/>
+                <a href="${appcontext}/content/jms/jms_jboss_ejb3.jsp">JMS (JBoss/EJB3 with MDB)</a>
+                <br/>
+                <br/>
+                <b>JavaFX</b>
+                <br/>
+                <a href="${appcontext}/content/javafx/javafx.jsp">JavaFX CRUD</a>
+                <br/>
+                <br/>
+                <b>Web Services</b>
+                <br/>
+                <a href="${appcontext}/content/webservices/jboss_webservices.jsp">JBoss Web Service (JAX-WS,Axis2)</a>
+                <br/>
+                <br/>
+                <b>EJB 2.1</b>
+                <br/>
+                <a href="${appcontext}/content/jms/jms_jboss1.jsp">JMS (JBoss with MDB)</a>
+                <br/>
+                <a href="${appcontext}/content/ejb/ejb2_1.jsp">EJB 2.1 (Local)</a>
+                <br/>
+                <a href="${appcontext}/content/ejb/ejb2_1_remote.jsp">EJB 2.1 (Remote)</a>
+                <br/>
+                <br/>
+                <b>JMS</b>
+                <br/>
+                <a href="${appcontext}/content/jms/jms_jboss1.jsp">JMS (JBoss with MDB-EJB2.1)</a>
+                <br/>
+                <a href="${appcontext}/content/jms/jms_jboss_ejb3.jsp">JMS (JBoss/EJB3 with MDB)</a>
+                <br/>
+                <br/>
+                <b>Patterns</b>
+                <br/>
+                <a href="${appcontext}/content/patterns/visitor-pattern.jsp">Visitor Pattern</a>
+                <br/>
+                <br/>
+                <b>Ajax</b>
+                <br/>
+                <a href="/2007/07/15/jquery_options.html">JQuery - Select alters other select</a>
+                <br/>
+                <a href="#">File Upload with Progress Bar</a>
+                <br/>
+                <a href="#">Mutiple select alters many</a>
+                <br/>
+                <br/>
+                <b>iBATIS</b>
+                <br/>
+                <a href="${appcontext}/content/ibatis/ibatis_lesson1.jsp">iBATIS Lesson 1</a>
+                <br/>
+                <a href="${appcontext}/content/ibatis/spring_ibatis.jsp">Struts-Spring-iBATIS</a>
+                <br/>
+                <br/>
+                <b>JSF</b>
+                <br/>
+                <a href="${appcontext}/content/jsf/jsf_crud.jsp">JSF CRUD</a>
+                <br/>
+                <br/>
+                <b>JSTL</b>
+                <br/>
+                <a href="${appcontext}/content/jstl/jstl_intro.jsp">Introduction to JSTL</a>
+                <br/>
+                <br/>
+                <b>SiteMesh</b>
+                <br/>
+                <a href="${appcontext}/content/sitemesh/sitemesh.jsp">SiteMesh (instead of Tiles)</a>
+                <br/>
+                <br/>
+                <b>Struts 1.x</b>
+                <br/>
+                <a href="${appcontext}/content/struts/struts_lesson1.jsp">Lesson 1</a>
+                <br/>
+                <a href="${appcontext}/content/struts/struts_lesson2.jsp">Lesson 2</a>
+                <br/>
+                <a href="${appcontext}/content/struts/struts_lesson3.jsp">Lesson 3</a>
+                <br/>
+                <a href="${appcontext}/content/struts/struts_crud.jsp">Struts CRUD</a>
+                <br/>
+                <a href="${appcontext}/content/struts/struts_token.jsp">Strus using Token</a>
+                <br/>
+                <a href="${appcontext}/content/struts/struts_nested.jsp">Using Nested tag</a>
+                <br/>
+                <a href="${appcontext}/content/struts/validate_manually.jsp">Call validation manually</a>
+                <br/>
+                <a href="${appcontext}/content/struts/message_resources.jsp">Using Message Resources</a>
+                <br/>
+                <br/>
+                <b>WebWork</b>
+                <br/>
+                <a href="${appcontext}/content/webwork/webwork_crud_p.jsp">WebWork CRUD (Phil)</a>
+                <br/>
+                <a href="${appcontext}/content/webwork/webwork_crud_lm.jsp">WebWork CRUD (Larry)</a>
+                <br/>
+                <br/>
+                <b>Wicket</b>
+                <br/>
+                <a href="${appcontext}/content/wicket/wicket_crud.jsp">Wicket CRUD</a>
+                <br/>
+                <a href="${appcontext}/content/wicket/wicket_ibatis.jsp">Wicket using iBATIS</a>
+                <br/>
+                <br/>
+                <br/>
+                <b>Other</b>
+                <br/>
+                <a href="${appcontext}/content/misc/aop_oldskool.jsp">AOP - Old Skool
+                <br/>
+                <br/>
+                <hr style="height:2px;border:0;background-color:#D1E5A6;margin-left:15px;padding-right:15px;"/>
+                <br/>
+                <a href="${appcontext}/content/misc/resources.jsp">RESOURCES</a>
+                <br/>
+                <br/>
+                Contact: <a href="mailto:rick@learntechnology.net">rick@learntechnology.net</a>
+                <br/>
+        </div> 
+</div> 
+
+ 
+			</td>
+			
+			<td class="col2" width="*"> 
+			 <div id="article">
+  	<div class="pageTitle">Stripes CRUD - 01.05.2007</div>
+  	<div class="post-content">
+		<div class="sectionHeading">Introduction</div>
+<div class="section">This application is basically the same as the "stripes-crud" application and lesson found 
+<a href="/2007/09/27/Stripes_CRUD.html">here</a>. See that lesson for a more complete deomonstration. All the classes
+in the source code you can download are groovy classes. Below I'll show the two DAO classes used. This app is really simple and doesn't
+do a whole lot, but it will get you feel of some basic CRUD. (In a follow up I'll have this running with iBATIS and some Spring.)
+<br/><br/>
+  
+
+<div class="sectionHeading">Building and Running</div>
+<div class="section">
+Download the source code using the link above. The source comes with an ant build file.<br/><br/>
+**Unlike the previous stripes-crud application I'm now using Resin instead of Tomcat. Just modify the server and deploydir lines in the ant build.xml
+file to point to your appropriate server and deploy path. <br/><br/>
+Type "ant deploy" from within the directory where you extracted the source code, and it will compile the war and deploy it to your server. Start your 
+server and go to http://localhost:8080/stripes-crud-groovy/  (assuming you're using port 8080 of course.) A war is also built in the dist directory 
+of the project.
+<br/><br/>
+(Lastly, I ended up putting the groovy-all jar in the WEB-INF/lib instead of the smaller groovy.jar. The only reason is because I didn't feel like 
+messing around figuring out the classpath issues when running the ant groovy compiler which needs the groovy-all jar and it would get confused if
+I had the smaller jar in the WEB-INF/lib since that's in my classpath also for the build. I could fix it, I'm just being lazy. Just know that if you
+go to really deploy a real app you don't need the larger groovy-all jar in your app's lib, just use the smaller groovy.jar.)
+</div>
+
+
+<div class="sectionHeading">Department.groovy</div>
+<div class="section">
+<pre><span class="syntax0"><span class="syntax8">import</span> org.apache.commons.lang.builder.ToStringBuilder
+
+<span class="syntax10">class</span> Department {
+    <span class="syntax10">int</span> departmentId
+    String name
+    
+    String <span class="syntax6">toString</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> ToStringBuilder.<span class="syntax6">reflectionToString</span><span class="syntax18">(</span><span class="syntax14">this</span><span class="syntax18">)</span>
+    }
+}
+</span></pre>
+</div>
+
+<div class="sectionHeading">Employee.groovy</div>
+<div class="section">
+<pre><span class="syntax0"><span class="syntax8">import</span> org.apache.commons.lang.builder.ToStringBuilder
+
+<span class="syntax10">class</span> Employee {
+    <span class="syntax10">int</span> employeeId
+    <span class="syntax10">int</span> age
+    String firstName
+    String lastName
+    Department department
+    
+    String <span class="syntax6">toString</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> ToStringBuilder.<span class="syntax6">reflectionToString</span><span class="syntax18">(</span><span class="syntax14">this</span><span class="syntax18">)</span>
+    }
+}
+</span></pre>
+</div>
+
+
+<div class="sectionHeading">EmployeeDao.groovy</div>
+<div class="section">
+<pre><span class="syntax0"><span class="syntax10">class</span> EmployeeDao {
+     <span class="syntax8">static</span> List employees  <span class="syntax18">=</span> 
+      [<span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span> employeeId: <span class="syntax5">4</span>, firstName: <span class="syntax13">&quot;</span><span class="syntax13">Greg</span><span class="syntax13">&quot;</span>, lastName: <span class="syntax13">&quot;</span><span class="syntax13">Ward</span><span class="syntax13">&quot;</span>, age: <span class="syntax5">25</span>, department: DepartmentDao.departmentsMap[<span class="syntax5">100</span>] <span class="syntax18">)</span>,
+       <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span> employeeId: <span class="syntax5">1</span>, firstName: <span class="syntax13">&quot;</span><span class="syntax13">John</span><span class="syntax13">&quot;</span>, lastName: <span class="syntax13">&quot;</span><span class="syntax13">Supper</span><span class="syntax13">&quot;</span>, age: <span class="syntax5">36</span>, department: DepartmentDao.departmentsMap[<span class="syntax5">300</span>] <span class="syntax18">)</span>,
+       <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span> employeeId: <span class="syntax5">3</span>, firstName: <span class="syntax13">&quot;</span><span class="syntax13">Fred</span><span class="syntax13">&quot;</span>, lastName: <span class="syntax13">&quot;</span><span class="syntax13">Doofus</span><span class="syntax13">&quot;</span>, age: <span class="syntax5">39</span>, department: DepartmentDao.departmentsMap[<span class="syntax5">200</span>] <span class="syntax18">)</span>,
+       <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span> employeeId: <span class="syntax5">2</span>, firstName: <span class="syntax13">&quot;</span><span class="syntax13">Bob</span><span class="syntax13">&quot;</span>, lastName: <span class="syntax13">&quot;</span><span class="syntax13">Blobber</span><span class="syntax13">&quot;</span>, age: <span class="syntax5">24</span>, department: DepartmentDao.departmentsMap[<span class="syntax5">100</span>] <span class="syntax18">)</span>  ]
+    
+    List <span class="syntax6">getAllEmployees</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> employees.<span class="syntax11">sort</span>{a,b <span class="syntax18">-&gt;</span> a.lastName.<span class="syntax6">equalsIgnoreCase</span><span class="syntax18">(</span>b.lastName<span class="syntax18">)</span> <span class="syntax18">?</span> <span class="syntax5">0</span>: a.lastName.<span class="syntax6">toUpperCase</span><span class="syntax18">(</span><span class="syntax18">)</span> &lt; b.lastName.<span class="syntax6">toUpperCase</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">?</span> <span class="syntax18">-</span><span class="syntax5">1</span>: <span class="syntax5">1</span>}
+    }
+
+    <span class="syntax9">def</span> <span class="syntax6">getEmployee</span><span class="syntax18">(</span>id<span class="syntax18">)</span> {
+        <span class="syntax8">return</span> employees.<span class="syntax11">find</span>{ <span class="syntax15">it</span>.employeeId <span class="syntax18">=</span><span class="syntax18">=</span> id }
+    }
+
+    <span class="syntax9">def</span> <span class="syntax6">update</span><span class="syntax18">(</span>emp<span class="syntax18">)</span> {
+        emp.department <span class="syntax18">=</span> DepartmentDao.departmentsMap[ emp.department.departmentId ]
+        employees[employees.findIndexOf{ <span class="syntax15">it</span>.employeeId <span class="syntax9">in</span> emp.employeeId }] <span class="syntax18">=</span> emp
+    }
+
+    <span class="syntax9">def</span> <span class="syntax6">insert</span><span class="syntax18">(</span>emp<span class="syntax18">)</span> {
+        <span class="syntax9">def</span> mc<span class="syntax18">=</span> [compare:{a,b <span class="syntax18">-&gt;</span> a.employeeId <span class="syntax18">=</span><span class="syntax18">=</span> b.employeeId<span class="syntax18">?</span> <span class="syntax5">0</span>: a.employeeId &lt; b.employeeId <span class="syntax18">?</span> <span class="syntax18">-</span><span class="syntax5">1</span>: <span class="syntax5">1</span>}] <span class="syntax9">as</span> Comparator
+        emp.department <span class="syntax18">=</span> DepartmentDao.departmentsMap[ emp.department.departmentId]
+        emp.employeeId <span class="syntax18">=</span> <span class="syntax18">(</span>employees.<span class="syntax6">max</span><span class="syntax18">(</span>mc<span class="syntax18">)</span><span class="syntax18">)</span>.employeeId <span class="syntax18">+</span> <span class="syntax5">1</span>
+        employees.<span class="syntax6">add</span><span class="syntax18">(</span>emp<span class="syntax18">)</span>
+    }
+
+    <span class="syntax9">def</span> <span class="syntax6">delete</span><span class="syntax18">(</span>id<span class="syntax18">)</span> {
+        employees.<span class="syntax6">remove</span><span class="syntax18">(</span> employees.findIndexOf{ <span class="syntax15">it</span>.employeeId <span class="syntax9">in</span> id } <span class="syntax18">)</span>
+    }
+}
+</span></pre>
+</div>
+
+<div class="sectionHeading">DepartmentDao.groovy</div>
+<div class="section">
+<pre><span class="syntax0"><span class="syntax10">class</span> DepartmentDao {
+    <span class="syntax8">static</span> Map departmentsMap <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">HashMap</span><span class="syntax18">(</span><span class="syntax18">)</span>
+    <span class="syntax8">static</span> List departments <span class="syntax18">=</span> [ 
+        <span class="syntax8">new</span> <span class="syntax6">Department</span><span class="syntax18">(</span> departmentId: <span class="syntax5">100</span>, name: <span class="syntax13">&quot;</span><span class="syntax13">Accounting</span><span class="syntax13">&quot;</span> <span class="syntax18">)</span>,
+        <span class="syntax8">new</span> <span class="syntax6">Department</span><span class="syntax18">(</span> departmentId: <span class="syntax5">200</span>, name: <span class="syntax13">&quot;</span><span class="syntax13">HR</span><span class="syntax13">&quot;</span><span class="syntax18">)</span>,
+        <span class="syntax8">new</span> <span class="syntax6">Department</span><span class="syntax18">(</span> departmentId: <span class="syntax5">300</span>, name: <span class="syntax13">&quot;</span><span class="syntax13">Sales</span><span class="syntax13">&quot;</span><span class="syntax18">)</span>]
+    
+    <span class="syntax8">static</span> { 
+        departments.<span class="syntax11">each</span> { dept <span class="syntax18">-&gt;</span>
+            departmentsMap.<span class="syntax6">put</span><span class="syntax18">(</span> dept.departmentId,  dept <span class="syntax18">)</span>
+        }
+    }
+    List <span class="syntax6">getDepartments</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> departments
+    }
+    Map <span class="syntax6">getDepartmentsMap</span><span class="syntax18">(</span><span class="syntax18">)</span> { 
+        <span class="syntax8">return</span> departmentsMap
+    }
+}
+</span></pre>
+</div>
+
+<div class="sectionHeading">EmployeeActionBean.groovy</div>
+<div class="section">
+The only thing I can't seem to get working is the nested annotation syntax. The Groovy compiler complains. If anyone knows why, or a work-around
+please let me know.<br/><br/>
+You'll see service method calls here, but all they do is delegate to the dao classes, so I didn't even bother to show them since they were so trivial. 
+(I really could have just left them out, but some people like layers so I left them in.)<br/>
+
+
+<pre><span class="syntax0"><span class="syntax10">class</span> EmployeeActionBean <span class="syntax8">extends</span> BaseActionBean {
+    <span class="syntax8">static</span> String EMPLOYEES_DISPLAY <span class="syntax18">=</span> <span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">Employee</span><span class="syntax13">.</span><span class="syntax13">action</span><span class="syntax13">?</span><span class="syntax13">employees</span><span class="syntax13">=</span><span class="syntax13">&quot;</span>
+    <span class="syntax8">static</span> String EMPLOYEES <span class="syntax18">=</span> <span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">WEB</span><span class="syntax13">-</span><span class="syntax13">INF</span><span class="syntax13">/</span><span class="syntax13">jsp</span><span class="syntax13">/</span><span class="syntax13">employees</span><span class="syntax13">.</span><span class="syntax13">jsp</span><span class="syntax13">&quot;</span>
+    <span class="syntax8">static</span> String EMPLOYEE_FORM <span class="syntax18">=</span> <span class="syntax13">&quot;</span><span class="syntax13">/</span><span class="syntax13">WEB</span><span class="syntax13">-</span><span class="syntax13">INF</span><span class="syntax13">/</span><span class="syntax13">jsp</span><span class="syntax13">/</span><span class="syntax13">employeeForm</span><span class="syntax13">.</span><span class="syntax13">jsp</span><span class="syntax13">&quot;</span>
+    
+    EmployeeService employeeService <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">EmployeeService</span><span class="syntax18">(</span><span class="syntax18">)</span>
+    DepartmentService departmentService <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">DepartmentService</span><span class="syntax18">(</span><span class="syntax18">)</span>
+    
+ 
+<span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1">@ValidateNestedProperties([</span>
+<span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1">@Validate(field=&quot;firstName&quot;,</span><span class="syntax1"> </span><span class="syntax1">required=true),</span>
+<span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1">@Validate(field=&quot;lastName&quot;,</span><span class="syntax1"> </span><span class="syntax1">required=true),</span>
+<span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1">@Validate(field=&quot;age&quot;,</span><span class="syntax1"> </span><span class="syntax1">required=true,converter=IntegerTypeConverter.class)</span>
+<span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1"> </span><span class="syntax1">])</span><span class="syntax1"> </span> 
+    Employee employee
+    
+    @DontValidate
+    @DefaultHandler
+    <span class="syntax8">public</span> Resolution  <span class="syntax6">employees</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> <span class="syntax8">new</span> <span class="syntax6">ForwardResolution</span><span class="syntax18">(</span>EMPLOYEES<span class="syntax18">)</span>
+    }
+
+    @DontValidate
+    Resolution <span class="syntax6">preEdit</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">if</span> <span class="syntax18">(</span> employee<span class="syntax18">?</span>.employeeId <span class="syntax18">)</span> {
+            employee <span class="syntax18">=</span> employeeService.<span class="syntax6">getEmployee</span><span class="syntax18">(</span>employee.employeeId<span class="syntax18">)</span>
+        }   
+        <span class="syntax8">return</span> <span class="syntax8">new</span> <span class="syntax6">ForwardResolution</span><span class="syntax18">(</span>EMPLOYEE_FORM<span class="syntax18">)</span>
+    }
+
+    Resolution <span class="syntax6">save</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">if</span> <span class="syntax18">(</span> employee<span class="syntax18">?</span>.employeeId<span class="syntax18">)</span> {
+            employeeService.<span class="syntax6">updateEmployee</span><span class="syntax18">(</span>employee<span class="syntax18">)</span>
+        } <span class="syntax8">else</span> {
+            employeeService.<span class="syntax6">insertEmployee</span><span class="syntax18">(</span>employee<span class="syntax18">)</span>
+        }
+        <span class="syntax8">return</span> <span class="syntax8">new</span> <span class="syntax6">RedirectResolution</span><span class="syntax18">(</span>EMPLOYEES_DISPLAY<span class="syntax18">)</span>
+    }
+
+    @DontValidate
+    <span class="syntax8">public</span> Resolution <span class="syntax6">delete</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        employeeService.<span class="syntax6">deleteEmployee</span><span class="syntax18">(</span>employee.employeeId<span class="syntax18">)</span>
+        <span class="syntax8">return</span> <span class="syntax8">new</span> <span class="syntax6">RedirectResolution</span><span class="syntax18">(</span>EMPLOYEES_DISPLAY<span class="syntax18">)</span>
+    }
+
+    @DontValidate
+    <span class="syntax8">public</span> Resolution <span class="syntax6">cancel</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> <span class="syntax8">new</span> <span class="syntax6">RedirectResolution</span><span class="syntax18">(</span>EMPLOYEES_DISPLAY<span class="syntax18">)</span>
+    }
+
+    List <span class="syntax6">getAllDepartments</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> departmentService.<span class="syntax6">getAllDepartments</span><span class="syntax18">(</span><span class="syntax18">)</span>
+    }
+    List <span class="syntax6">getAllEmployees</span><span class="syntax18">(</span><span class="syntax18">)</span> {
+        <span class="syntax8">return</span> employeeService.<span class="syntax6">getAllEmployees</span><span class="syntax18">(</span><span class="syntax18">)</span>
+    } 
+}
+</span></pre>
+</div>
+
+<div class="author">Code and Lesson - Rick Reumann</div> 
+
+  	</div> 
+</div>
+
+			</td>
+		     
+			<td class="col3">
+                    <script type="text/javascript"><!--
+google_ad_client = "pub-5778873356056544";
+google_ad_width = 120;
+google_ad_height = 600;
+google_ad_format = "120x600_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "D1E5A6";
+google_color_bg = "F8FBF2";
+google_color_link = "996600";
+google_color_url = "008000";
+google_color_text = "6F6F6F";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br/><br/>
+<script type="text/javascript"><!--
+google_ad_client = "pub-5778873356056544";
+google_ad_width = 120;
+google_ad_height = 60;
+google_ad_format = "120x60_as_rimg";
+google_cpa_choice = "CAAQxZqazgEaCMOiwb9yonQWKIHD93M";
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+			</td> 
+		</tr>
+	</table>
+
+	</body>
+</html>
