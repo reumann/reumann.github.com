@@ -33,7 +33,7 @@ set. (I think the later versions might use TOMCAT_HOME so just fix the build fil
 also requires Java5 and Servlet spec 2.4/JSP2.0 (Tomcat5 or higher is fine). Once the war is deployed and tomcat is runinng, just go to the url <a href="http://localhost:8080/stripes-crud/">http://localhost:8080/stripes-crud/</a>.
 <br/><br/>
 You should see:<br/><br/>
-<img alt="employees" src="employees.jpg" />
+<img alt="employees" src="/img/employees.jpg" />
  
 
 
@@ -279,7 +279,7 @@ public class EmployeeActionBean extends BaseActionBean {
 <br/>
 Sample validation errors in employeeForm.jsp:
 <br/><br/>
-<img alt="employees" src="employeeForm.jpg" />
+<img alt="employees" src="/img/employeeForm.jpg" />
 </div>
 
 <div class="sectionHeading">web.xml</div>

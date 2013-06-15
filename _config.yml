@@ -1,5 +1,7 @@
-title: learntechnology.net
+name: learntechnology.net
+pygments: true
 #   permalink: title 
-auto: true
 # markdown: rdiscount
-server: true
+#relative_permalinks: false 
+
+

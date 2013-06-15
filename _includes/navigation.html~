@@ -5,26 +5,26 @@
                 <br/>
                 <b>ZK</b>
                 <br/>
-                <a href="{% post_url 2007-09-27-page_large_results %}">Page and Sort Large Results</a>
+                <a href="{% post_url 2012-11-12-page_large_results %}">Page and Sort Large Results</a>
                 <br/>
                 <br/>
                 <b>Stripes</b>
                 <br/>
                 <a href="{% post_url 2007-09-27-Stripes_CRUD %}">Stripes CRUD</a>
                 <br/>
-                <a href="${appcontext}/content/stripes/stripes-crud-groovy.jsp">Stripes CRUD Groovy</a>
+                <a href="{% post_url 2007-01-05-stripes-crud-groovy %}">Stripes CRUD Groovy</a>
                 <br/>
                 <br/>
                 <b>Grails</b>
                 <br/>
-                <a href="${appcontext}/content/grails/grails_part1.jsp">Grails CRUD</a>
+                <a href="{% post_url 2012-07-28-grails_part1 %}">Grails CRUD</a>
                 <br/>
                 <br/>
                 <b>Struts 2</b>
                 <br/>
-                <a href="${appcontext}/content/struts2/struts2_crud.jsp">Struts2 CRUD</a>
+                <a href="{% post_url 2007-11-26-struts2_crud %}">Struts2 CRUD</a>
                 <br/>
-                <a href="${appcontext}/content/struts2/struts2_hibernate.jsp">Struts2 Hibernate</a>
+                <a href="{% post_url 2007-12-09-struts2_hibernate %}">Struts2 Hibernate</a>
                 <br/>
                 <a href="${appcontext}/content/struts2/struts2_hibernate_pico.jsp">Struts2 PicoContainer w/ Hibernate</a>
                 <br/>
