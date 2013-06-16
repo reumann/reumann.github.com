@@ -2,10 +2,11 @@
 title: JQuery - Select Alters Other Select Options
 layout: article
 ---
-<div class="source">
-<a href="http://ubuntuone.com/2t6l0l4zQLu7X7GbHXl7Xy">jquery-options source code</a><br/>  
-<a href="http://ubuntuone.com/4K4RhvrjJaNY71n0HSNMHG">jquery-options war</a>
-</div>
+<a href="https://www.sugarsync.com/pf/D7754172_2045968_220569">jquery-options source code</a><br/>  
+<a href="${appcontext}/examples/jquery-options.war">jquery-options war</a><br/> 
+<br/> 
+ 
+<br/><br/> 
 <div class="sectionHeading">Introduction</div>
 <div class="section">
 This example shows two basic things. The main thing it's illustrating is the population of a 

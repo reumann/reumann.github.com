@@ -1,0 +1,9 @@
+Struts iBATIS Lesson
+<div class="source">
+<a href="${appcontext}/examples/struts_ibatis.zip">struts_ibatis source code</a><br/>
+<a href="${appcontext}/examples/struts_ibatis.war">struts_ibatis.war</a>
+</div> 
+
+<p>I actually wrote the Struts-Spring-iBATIS lesson before this one. This is basically the same application but without using Spring.  
+You can use this source code and follow along with the Struts-Spring-iBATIS lesson to get started.</p>
+ 

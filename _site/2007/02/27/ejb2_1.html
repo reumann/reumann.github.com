@@ -9,7 +9,7 @@ lessons, tutorials, JSP, J2EE, JSTL, C#, .NET, Action, Forward, Token, Validate,
 Messages, Errors, Dyna, Validation, DynaForm, ActionForm, Dispatch, DispatchAction, Redirect, Tags"/> 
 <meta name="description" content="Information Technology"/>
          	
-        <title>EJB3 - Stateless Session Bean</title>  
+        <title>EJB 2.1 - Local</title>  
 	<link rel="stylesheet" href="/css/learntechnology.css" type="text/css" media="screen" /> 
 	<script type="text/javascript">
 
@@ -162,16 +162,19 @@ Messages, Errors, Dyna, Validation, DynaForm, ActionForm, Dispatch, DispatchActi
 			
 			<td class="col2" width="98%"> 
 			 <div id="article">
-  	<div class="pageTitle">EJB3 - Stateless Session Bean - 04.26.2007</div>
+  	<div class="pageTitle">EJB 2.1 - Local - 02.27.2007</div>
   	<div class="post-content">
 		<div class="source">
-<a href="http://ubuntuone.com/79axAKwepGBgTCOFwJ3rRg">rr-employee-allinone 3 local stateless source code</a><br/>
-<a href="http://ubuntuone.com/0RKziWLkTk0tgWChARSR4K">rr-employee-allinone-ejb3.ear</a> 
-</div> 
+<a href="http://ubuntuone.com/01PPV16b2ww2MMb78PtBMt">rr-employee-allinone 2.1 source code</a><br/>
+<a href="http://ubuntuone.com/70h88d4LBIBxpEpj3JIpew">rr-employee-allinone.ear</a>
+</div>
 <div class="sectionHeading">Introduction</div>
 <div class="section">
-EJB3 makes developing EJB applications very simple. Look at the 2.1 examples and you'll see all the configuration files
-you have to write. (Yes, I know using XDoclet removes that tedious stuff.)  <br/><br/> 
+This quick EJB lesson doesn't explain why you should or shouldn't use EJBs, nor does it
+talk about when to use them and when not to, nor does it even
+explain any of the concepts behind the different EJB components. This guide is simply to help someone
+see how to put together a working EJB 2.1 application using JBoss as the Application server.
+<br/><br/> 
 To be consistent with many of the other examples, the front end is built using the Employee Struts
 application that is used elsewhere on this site. (The Struts app is 1.x not 2.x). The front end of 
 choice doesn't matter at all so if you haven't even seen a Struts application it won't matter. Where
@@ -179,7 +182,9 @@ you see the "EmployeeAction" class in the source code that calls our EJB layer,
  just think of a Servlet (which is all a Struts Action actually is). 
 <br/><br/>
 This example is using Local EJB calls. Everything, including the war is placed in an ear and deployed on one instance of
-JBoss. (Changing to a remote lookup is easy, though, and I describe that as well in this lesson.)<br/><br/>
+JBoss. If you want an example of making remote EJB calls then see the <a
+href="${appcontext}/content/ejb/ejb2_1_remote.jsp">EJB 2.1 - Remote</a>
+<br/><br/>
 Without further ado, lets get started...
 </div>
 
@@ -189,15 +194,13 @@ Without further ado, lets get started...
 a complete walk through of every single component. Best thing to do is
 download the source above and unzip it into your project directory of
 choice. For eclipse users it comes with an eclipse project so you can
-just import that project file and be good to go (*NOTE: you will need to set a 
-JBOSS_HOME variable in eclipse build properties). To build using ant,
-type 'ant' or if you want to deploy it also, type 'ant deploy' to build and deploy the ear to JBoss.
+just import that project file and be good to go. To build using ant,
+type 'ant' and the project will build and deploy to the default server on JBoss. 
 <br/><br/>
 <b>Java5</b> The Java5 JDK needs to be set as your environment. JAVA_HOME env variable needs to be defined pointing to yth the JDK home directory.<br/>
 <br/>
-<b>JBoss 4.x</b> - Download JBoss 4.x here <a
-href="http://labs.jboss.com/portal/jbossas/download">http://labs.jboss.com/portal/jbossas/download</a>. Use the jems
-installer as described on the download page. Select "EJB3" when the installer prompt comes up.
+<b>JBoss 4.x</b> - Download JBoss 4.x here <a href="http://labs.jboss.com/portal/jbossas/download">http://labs.jboss.com/portal/jbossas/download</a>. 
+Since you'll be probably be coding with the EJB 3.0 spec soon enough, set up JBoss4.x using the installer as described on the download page.
 After JBoss is installed declare a JBOSS_HOME environment variable pointing to the JBoss root directory.<br/>
 <br/>
 <b>Using the build.xml files</b> To run the builds you will need ant installed.
@@ -214,18 +217,24 @@ jboss/bin directory with 'run.bat' or 'run.sh' depending on your OS.
 Once jboss has started, go the following url:
 http://localhost:8080/rr-employee-allinone/
 <br/><br/>
+<div class="sectionHeading">A Note About XDoclet</div>
+<div class="section">
+XDoclet reduces the amount of annoying code you have to write when
+dealing with EJB 2.1 by probably 90%. I didn't use XDoclet here since
+I wanted to show all the steps you'd have go through to work with EJBs
+when not using XDoclet. Using EJB3 things become even more simplified with the use of annotations and you don't even need to use XDoclet.</div>
 
 <div class="sectionHeading">The Persistence Layer</div>
 <div class="section">
-This sample "Employee" application simply calls a
-stateless session bean which in turn calls a service class method that hands our request off to the dao layer.
-Our dao layer is the simple one used in some of the other samples on this site. If you are using EJB3 you might want
-to consider uisng entity EJBs. In this demo app, I could have just left
+Our EJBs will simply
+call a service class that in turn calls our dao to handle our CRUD
+(create, retrieve, update, delete) operations. I could have just left
 the service class out and had the EJBs call the daos directly, but my
 personal preference is to have one extra layer of abstraction there
 just in case I need to do any non-dao related stuff that still belongs
 in a common area. The CRUD Employee dao in this example does nothing
-more than work with an in-memory list of items. <br/><br/>
+more than work with an in-memory list of items. 
+<br/><br/>
 Our EmployeeService class looks like:<br/>
 <pre class="decorated"><code>
 public class EmployeeService {
@@ -254,126 +263,250 @@ public class EmployeeService {
 </code></pre>
 </div>
 
-<div class="sectionHeading">EmployeeMaintenanceBean</div>
+<div class="sectionHeading">EmployeeFacade</div>
 <div class="section">
-This is our EJB that has the actual business method implementations. The interesting thing is that you'll see this object
-is just a POJO with a @Stateless annotation. That's all that's needed to created to our EJB! 
+This is our EJB that has the actual business method implementations
+(our calls to our service/persistence layer). I followed the Sun convention and the one used in the
+"JBoss At Work" book and called all our object a Facade since our EJB
+acts as a Stateless Session Facade object 
+<a href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/SessionFacade.html">http://java.sun.com/blueprints/corej2eepatterns/Patterns/SessionFacade.html</a> - 
+simply the object that exposes our business methods for our client to use.<br/><br/>
 <pre class="decorated"><code>
-import javax.ejb.Stateless;
+public class EmployeeFacadeBean implements SessionBean {
 
-import net.reumann.common.vo.Employee;
-import net.reumann.persistence.service.EmployeeService;
+    private SessionContext sessionCtx;
 
-@Stateless
-public class EmployeeMaintenanceBean implements IEmployeeMaintenance{
+    public void setSessionContext(SessionContext sessionCtx) throws EJBException {
+        this.sessionCtx = sessionCtx;
+    }
 
-    public ListE&lt;mployee> getAllEmployees() {
+    public void ejbCreate() throws CreateException {}
+    public void ejbRemove() throws EJBException {}
+    public void ejbActivate() throws EJBException {}
+    public void ejbPassivate() throws EJBException {}
+
+    public List&lt;Employee> getAllEmployees() throws EJBException {
         return EmployeeService.getAllEmployees();
     }
 
-    public void updateEmployee(Employee emp) {
+    public void updateEmployee(Employee emp)throws EJBException  {
         EmployeeService.updateEmployee(emp);
     }
 
-    public void deleteEmployee(Integer id)  {
+    public void deleteEmployee(Integer id) throws EJBException  {
         EmployeeService.deleteEmployee(id);
     }
 
-    public  Employee getEmployee(Integer id)  {
+    public  Employee getEmployee(Integer id) throws EJBException  {
         return EmployeeService.getEmployee(id);
     }
 
-    public void insertEmployee(Employee emp)  {
+    public void insertEmployee(Employee emp) throws EJBException  {
         EmployeeService.insertEmployee(emp);
     }
 }
 </code></pre>
 </div>
-
-<div class="sectionHeading">IEmployeeMaintenance</div>
+<br/>
+TODO: document the code snippets that follow...
+<br/>
+<div class="sectionHeading">EmployeeFacadeLocal</div>
 <div class="section">
-This is our Local interface that is the object our client (the Action Servlet) will use.
-What makes this an EJB inerface is the @Local annotation. If we need this to be a @Remote interface we would just 
-change the @Local to @Remote and rebuild. (The EJB3 spec says you can't have an interface declared as both @Local and @Remote, but 
-using the jboss-ejb3x.jar you CAN do this. If you want to be more compliant and you want both interfaces avaialable simply make an empty local
-interface and empty remote interface (both declared with approppriate annotations) and have them extend a base interface tha has the stub methods.)
-This @Local interface can also be declared from the main EJB class - EmployeeMainteanceBean - if you so desired, but I'm not showing that in this
-example. (If you create this as a Remote interface, after you complete the build, this interface class would be the client stub that your remote client would need to use.)
 <pre class="decorated">
-<code>
 import java.util.List;
-import javax.ejb.Local;
+import javax.ejb.EJBException;
+import javax.ejb.EJBLocalObject;
+
 import net.reumann.common.vo.Employee;
 
-@Local
-public interface IEmployeeMaintenance {
-    public List<Employee> getAllEmployees();
-    public void updateEmployee(Employee emp);
-    public void deleteEmployee(Integer id);
-    public Employee getEmployee(Integer id);
-    public void insertEmployee(Employee emp);
+public interface EmployeeFacadeLocal extends EJBLocalObject {
+    public List&lt;Employee> getAllEmployees() throws EJBException;
+
+    public void updateEmployee(Employee emp) throws EJBException;
+
+    public void deleteEmployee(Integer id) throws EJBException;
+
+    public Employee getEmployee(Integer id) throws EJBException;
+
+    public void insertEmployee(Employee emp) throws EJBException;
 }
+</code></pre>
+</div>
+
+<div class="sectionHeading">EmployeeFacadeLocalHome</div>
+<div class="section">
+<pre class="decorated"><code>
+import javax.ejb.CreateException;
+import javax.ejb.EJBLocalHome;
+
+public interface EmployeeFacadeLocalHome extends EJBLocalHome {
+    public static final String COMP_NAME = "java:comp/env/ejb/EmployeeFacadeLocal";
+    public static final String JNDI_NAME = "EmployeeFacadeLocal";
+
+    public EmployeeFacadeLocal create() throws CreateException;
+}
+</code></pre>
+</div>
+
+<div class="sectionHeading">ejb/META-INF/ejb-jar.xml</div>
+<div class="section">
+<pre class="decorated"><code>
+&lt;?xml version="1.0" encoding="UTF-8"?>
+
+&lt;ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd"
+	version="2.1">
+
+	&lt;description>ejb-jar.xml for ejb 2.1 Local tutorial&lt;/description>
+	&lt;display-name>ejb-jar.xml&lt;/display-name>
+
+	&lt;enterprise-beans>
+		&lt;!-- Session Beans -->
+		&lt;session>
+			&lt;description>EmployeeFacade Session Bean&lt;/description>
+			&lt;display-name>EmployeeFacade Session Bean&lt;/display-name>
+			&lt;ejb-name>EmployeeFacade&lt;/ejb-name>
+			&lt;home>net.reumann.ejb.EmployeeFacadeRemoteHome&lt;/home>
+			&lt;remote>net.reumann.ejb.EmployeeFacadeRemote&lt;/remote>
+			&lt;local-home>
+				net.reumann.ejb.EmployeeFacadeLocalHome
+			&lt;/local-home>
+			&lt;local>net.reumann.ejb.EmployeeFacadeLocal&lt;/local>
+			&lt;ejb-class>net.reumann.ejb.EmployeeFacadeBean&lt;/ejb-class>
+			&lt;session-type>Stateless&lt;/session-type>
+			&lt;transaction-type>Container&lt;/transaction-type>
+		&lt;/session>
+	&lt;/enterprise-beans>
+
+	&lt;assembly-descriptor>
+		&lt;container-transaction>
+			&lt;method>
+				&lt;ejb-name>EmployeeFacade&lt;/ejb-name>
+				&lt;method-intf>Local&lt;/method-intf>
+				&lt;method-name>getAllEmployees&lt;/method-name>
+				&lt;method-params>&lt;/method-params>
+			&lt;/method>
+			&lt;trans-attribute>Required&lt;/trans-attribute>
+		&lt;/container-transaction>
+		&lt;container-transaction>
+			&lt;method>
+				&lt;ejb-name>EmployeeFacade&lt;/ejb-name>
+				&lt;method-intf>Local&lt;/method-intf>
+				&lt;method-name>updateEmployee&lt;/method-name>
+				&lt;method-params>
+					&lt;method-param>net.reumann.common.vo.Employee&lt;/method-param>
+				&lt;/method-params>
+			&lt;/method>
+			&lt;trans-attribute>Required&lt;/trans-attribute>
+		&lt;/container-transaction>
+		&lt;container-transaction>
+			&lt;method>
+				&lt;ejb-name>EmployeeFacade&lt;/ejb-name>
+				&lt;method-intf>Local&lt;/method-intf>
+				&lt;method-name>deleteEmployee&lt;/method-name>
+				&lt;method-params>
+					&lt;method-param>java.lang.Integer&lt;/method-param>
+				&lt;/method-params>
+			&lt;/method>
+			&lt;trans-attribute>Required&lt;/trans-attribute>
+		&lt;/container-transaction>
+	....	
+	&lt;/assembly-descriptor>
+
+&lt;/ejb-jar>
+</code></pre>
+</div>
+<div class="sectionHeading">ejb/META-INF/jboss.xml</div>
+<div class="section">
+<pre class="decorated"><code>
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;!DOCTYPE jboss PUBLIC "-//JBoss//DTD JBOSS 4.0//EN" "http://www.jboss.org/j2ee/dtd/jboss_4_0.dtd">
+&lt;jboss>
+	&lt;enterprise-beans>
+		&lt;session>
+			&lt;ejb-name>EmployeeFacade&lt;/ejb-name>
+			&lt;jndi-name>EmployeeFacadeRemote&lt;/jndi-name>
+			&lt;local-jndi-name>EmployeeFacadeLocal&lt;/local-jndi-name>
+			&lt;method-attributes>&lt;/method-attributes>
+		&lt;/session>
+	&lt;/enterprise-beans>
+	&lt;assembly-descriptor>&lt;/assembly-descriptor>
+	&lt;resource-managers>&lt;/resource-managers>
+&lt;/jboss>
 </code></pre>
 </div>
 
 <div class="sectionHeading">common package  ServiceLocator</div>
 <div class="section">
-This simple class and method just looks up our EJB from a passed in JNDI name. You could skip using this class if you want and simply look up the
-Object from the InitialContext wherever you need your EJB. (Personally, I like using this kind of helper class.) The IntialContext will pick up any
-JNDI environment variables you want to pass in from a jndi.properties file. Since we're using this locally, we don't really need one, but it
-couldn't hurt to have one. The jndi.properties file in this application is found in the jndi directory, and gets complied into a conf.jar.
 <pre class="decorated"><code>
 public class ServiceLocator {
-
-    private ServiceLocator() {
-    }
-
-    public static Object getEJB(String jndiName) {
-        Object object = null;
+  ...
+  public static EJBLocalHome getEjbLocalHome(String localHomeJndiName) throws ServiceLocatorException {
+        EJBLocalHome localHome = null;
         try {
-            InitialContext ctx = new InitialContext();
-            object = ctx.lookup(jndiName);
-        } catch (Exception e) {
-            e.printStackTrace();
+            Context ctx = new InitialContext();
+            localHome = (EJBLocalHome) ctx.lookup(localHomeJndiName);
+        } catch (ClassCastException cce) {
+            throw new ServiceLocatorException(cce);
+        } catch (NamingException ne) {
+            throw new ServiceLocatorException(ne);
         }
-        return object;
+        return localHome;
     }
+   ...
 }
-</code></pre>
-<pre class="decorated"><code>
-#jndi.properties
-java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory
-java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces
-java.naming.provider.url=localhost:1099
 </code></pre>
 </div>
 
 <div class="sectionHeading">webapp pacakge - example call to an EJB in
 a Servlet</div>
 <div class="section">
-Calling our EmployeeMainteance EJB is easy from our servlet. I'm using the JNDI approach here, since for a while JBoss supposedly didn't support the
-injection approach with the @EJB annotation. Apparently JBoss now does support the @EJB direct injection approach, but I haven't tested its use
-within a war file. (Someone can let me know if they've had luck using EJB injection inside a war.) Using the jndi approach is easy enough though.
-The only tricky part you have to remember is if you are calling an EJB that is resides in ear file (like this exmaple does) you need to prepend your
-jndi lookup with the ear file name. If the ejb is in a jar file, you do not prpend the name lookup with the jar file name. So the jndi name lookup
-becomes either:<br/><br/>
-If ejb is in an ear: earName/ejbInterfaceName/local  (or /remote) or<br/>
-If ejb is in an jar: ejbInterfaceName/local (or /remote)<br/>
-<br/> 
-JBoss also has their own annotations that let you declare whatever jndi name you want, if you feel that's a better approach for you. (See the
-@LocalBinding and @RemoteBinding annotations.) <br/>
-
+*Note: For a real-life application is probably best to put these ejb calls in some kind of other layer outside your serlvet. This will make it easier to change around whether you need to make local EJB calls or remote ones.
 <pre class="decorated"><code>
-public static final String EMPLOYEE_JNDI_NAME = "rr-employee-allinone-ejb3/EmployeeMaintenanceBean/local";
-//...
-IEmployeeMaintenance employeeEJB = (IEmployeeMaintenance) ServiceLocator.getEJB(EMPLOYEE_JNDI_NAME);
+EmployeeFacadeLocalHome employeeHome = 
+    (EmployeeFacadeLocalHome) ServiceLocator.getEjbLocalHome(EmployeeFacadeLocalHome.COMP_NAME);
+EmployeeFacadeLocal employeeEJB = employeeHome.create();
 List&lt;Employee> employees = employeeEJB.getAllEmployees();
 </code></pre></div>
 
+<div class="sectionHeading">webapp package - WEB-INF/web.xml</div>
+<div class="section">
+Relevant portion to EJBs in web.xml, these EJB refs come at the end of
+the file after any context-param definitions.
+
+<pre class="decorated"><code>
+&lt;ejb-local-ref>
+	&lt;ejb-ref-name>ejb/EmployeeFacadeLocal&lt;/ejb-ref-name>
+	&lt;ejb-ref-type>Session&lt;/ejb-ref-type>
+	&lt;local-home>EmployeeFacadeLocalHome&lt;/local-home>
+	&lt;local>EmployeeFacadeLocal&lt;/local>
+&lt;/ejb-local-ref>
+</code></pre></div>
+
+<div class="sectionHeading">webapp package - WEB-INF/jboss-web.xml</div>
+<div class="section">
+<pre class="decorated"><code>
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;!DOCTYPE jboss-web PUBLIC "-//JBoss//DTD Web Application 2.4//EN"
+ "http://www.jboss.org/j2ee/dtd/jboss-web_4_0.dtd">
+
+&lt;jboss-web>
+	&lt;ejb-local-ref>
+		&lt;ejb-ref-name>ejb/EmployeeFacadeLocal&lt;/ejb-ref-name>
+		&lt;local-jndi-name>EmployeeFacadeLocal&lt;/local-jndi-name>
+	&lt;/ejb-local-ref>
+	&lt;ejb-local-ref>
+		&lt;ejb-ref-name>ejb/DepartmentFacadeLocal&lt;/ejb-ref-name>
+		&lt;local-jndi-name>DepartmentFacadeLocal&lt;/local-jndi-name>
+	&lt;/ejb-local-ref>
+&lt;/jboss-web>
+&lt;/code>&lt;/pre>&lt;/div>
+</code></pre></div>
+
+
 <div class="sectionHeading">ear application.xml file</div>
 <div class="section">
-Using the EJB3 approach with annotations we don't need an ejb.jar file! I don't need the ejb descriptors in my web.xml or a jboss-web.xml either.
-You still need to package things up correctly in an application.xml file, however. 
 <pre class="decorated"><code>
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;application xmlns="http://java.sun.com/xml/ns/j2ee"
@@ -381,7 +514,7 @@ You still need to package things up correctly in an application.xml file, howeve
              xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
                                  http://java.sun.com/xml/ns/j2ee/application_1_4.xsd"
              version="1.4">
-    &lt;display-name>rr-employee-allinone-EJB3 EAR&lt;/display-name>
+    &lt;display-name>rr-employee-allinone EAR&lt;/display-name>
     &lt;module>
         &lt;web>
             &lt;web-uri>rr_employee-webapp.war&lt;/web-uri>
@@ -401,15 +534,10 @@ You still need to package things up correctly in an application.xml file, howeve
         &lt;ejb>employee-ejb.jar&lt;/ejb>
     &lt;/module>
 &lt;/application>
-&lt;/code>&lt;/pre>&lt;/div>					
+&lt;/code>&lt;/pre>&lt;/div>
 </code></pre></div>
 
-<div class="sectionHeading">Conclusion</div>
-<div class="section">
-EJB3 makes using EJBs much easier than in the past. Obviously this sample app is just a quick demo. Using statefull session beans isn't any more
-difficult than the above (just change the @stateless annotation to @Stateful and you have a Stateful Session Bean (Of course there will probably be
-a few other things you'd handle inside the Stateful session bean.)</div>
-<div class="author">Code and Lesson - Rick Reumann</div> 					
+<div class="author">Code and Lesson - Rick Reumann</div>
 
   	</div> 
 </div>

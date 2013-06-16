@@ -10,14 +10,14 @@
                 <br/>
                 <b>Stripes</b>
                 <br/>
-                <a href="{% post_url 2007-09-27-Stripes_CRUD %}">Stripes CRUD</a>
+                <a href="{% post_url 2007-09-22-Stripes_CRUD %}">Stripes CRUD</a>
                 <br/>
-                <a href="{% post_url 2007-01-05-stripes-crud-groovy %}">Stripes CRUD Groovy</a>
+                <a href="{% post_url 2008-01-05-stripes-crud-groovy %}">Stripes CRUD Groovy</a>
                 <br/>
                 <br/>
                 <b>Grails</b>
                 <br/>
-                <a href="{% post_url 2012-07-28-grails_part1 %}">Grails CRUD</a>
+                <a href="{% post_url 2007-12-08-grails_part1 %}">Grails CRUD</a>
                 <br/>
                 <br/>
                 <b>Struts 2</b>
@@ -26,35 +26,35 @@
                 <br/>
                 <a href="{% post_url 2007-12-09-struts2_hibernate %}">Struts2 Hibernate</a>
                 <br/>
-                <a href="${appcontext}/content/struts2/struts2_hibernate_pico.jsp">Struts2 PicoContainer w/ Hibernate</a>
+                <a href="{% post_url 2008-07-17-struts2_hibernate_pico %}">Struts2 PicoContainer w/ Hibernate</a>
                 <br/>
                 <br/>
                 <b>EJB 3</b>
                 <br/>
-                <a href="${appcontext}/content/ejb/maven-ejb3.jsp">Maven-EJB3-JPA (JBoss5)</a>
+                <a href="{% post_url 2008-10-12-maven-ejb3 %}">Maven-EJB3-JPA (JBoss5)</a>
                 <br/>
-                <a href="${appcontext}/content/ejb/ejb3_local.jsp">EJB3 - JBoss/Stateless</a>
+                <a href="{% post_url 2007-04-26-ejb3_local %}">EJB3 - JBoss/Stateless</a>
                 <br/>
-                <a href="${appcontext}/content/jms/jms_jboss_ejb3.jsp">JMS (JBoss/EJB3 with MDB)</a>
+                <a href="{% post_url 2007-06-10-jms_jboss_ejb3  %}">JMS (JBoss/EJB3 with MDB)</a>
                 <br/>
                 <br/>
                 <b>JavaFX</b>
                 <br/>
-                <a href="${appcontext}/content/javafx/javafx.jsp">JavaFX CRUD</a>
+                <a href="{% post_url 2009-02-21-javafx %}">JavaFX CRUD</a>
                 <br/>
                 <br/>
                 <b>Web Services</b>
                 <br/>
-                <a href="${appcontext}/content/webservices/jboss_webservices.jsp">JBoss Web Service (JAX-WS,Axis2)</a>
+                <a href="{% post_url 2007-07-21-jboss_webservices %}">JBoss Web Service (JAX-WS,Axis2)</a>
                 <br/>
                 <br/>
                 <b>EJB 2.1</b>
                 <br/>
-                <a href="${appcontext}/content/jms/jms_jboss1.jsp">JMS (JBoss with MDB)</a>
+                <a href="{% post_url 2007-04-15-jms-jboss1 %}">JMS (JBoss with MDB)</a>
                 <br/>
-                <a href="${appcontext}/content/ejb/ejb2_1.jsp">EJB 2.1 (Local)</a>
+                <a href="{% post_url 2007-02-21-ejb2_1 %}">EJB 2.1 (Local)</a>
                 <br/>
-                <a href="${appcontext}/content/ejb/ejb2_1_remote.jsp">EJB 2.1 (Remote)</a>
+                <a href="{% post_url 2007-04-15-ejb2_1_remote %}">EJB 2.1 (Remote)</a>
                 <br/>
                 <br/>
                 <b>JMS</b>
